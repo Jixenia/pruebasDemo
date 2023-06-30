@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "d94d3c8c-a316-4236-9ac7-0caaeab880ab",
+		"name": "testJixe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28245844"
+	},
+	"item": [
+		{
+			"name": "Agregar Usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonDate = pm.response.json()\r",
+							"\r",
+							"pm.collectionVariables.set( 'userId', jsonDate.id )\r",
+							"\r",
+							"pm.test( 'Status code should be 201', function()\r",
+							"{ \r",
+							"    pm.response.to.have.status(201)\r",
+							"})\r",
+							"\r",
+							"pm.test( 'email should match', function()\r",
+							"{ \r",
+							"    pm.expect(jsonDate.email).to.be.eq('jixe695@gmail.com')\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Tenali Ramakrishna\",\r\n    \"gender\": \"male\",\r\n    \"email\": \"jixe695@gmail.com\",\r\n    \"status\": \"active\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocolo}}://{{url}}/{{visibilidad}}/{{version}}/users",
+					"protocol": "{{protocolo}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{visibilidad}}",
+						"{{version}}",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test( 'Status code should be 200', function()\r",
+							"{ \r",
+							"    pm.response.to.have.status(200)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocolo}}://{{url}}/{{visibilidad}}/{{version}}/users/{{userId}}",
+					"protocol": "{{protocolo}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{visibilidad}}",
+						"{{version}}",
+						"users",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test( 'Status code should be 200', function()\r",
+							"{ \r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"\r",
+							"const jsonDate = pm.response.json()\r",
+							"\r",
+							"pm.test( 'status should match', function()\r",
+							"{ \r",
+							"    pm.expect(jsonDate.status).to.be.eq('inactive')\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Tenali Ramakrishna\",\r\n    \"gender\": \"male\",\r\n    \"email\": \"jixe695@gmail.com\",\r\n    \"status\": \"inactive\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocolo}}://{{url}}/{{visibilidad}}/{{version}}/users/{{userId}}",
+					"protocol": "{{protocolo}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{visibilidad}}",
+						"{{version}}",
+						"users",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test( 'Status code should be 204', function()\r",
+							"{ \r",
+							"    pm.response.to.have.status(204)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{protocolo}}://{{url}}/{{visibilidad}}/{{version}}/users/{{userId}}",
+					"protocol": "{{protocolo}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{visibilidad}}",
+						"{{version}}",
+						"users",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "17896b48727266dfe273f34c56801d0d7e08f2d252d8b0c2d0b37a82d8b34681",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
